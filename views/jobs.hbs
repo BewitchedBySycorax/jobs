@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body>
+  <form action="/jobs" method="POST">
+    <fieldset>
+      <legend>Поиск работы</legend>
+
+      <label for="source-choice">Ресурс:</label>
+      <select name="source" id="source-choice">
+        <option value="hh">hh</option>
+        <option value="hc">Хабр Карьера</option>
+      </select>
+
+      <label for="city-choice">Город:</label>
+      <select name="city" id="city-choice">
+        <option value="moscow">Москва</option>
+        <option value="petersburg">Санкт-Петербург</option>
+        <option value="new_city">Добавьте ещё города по желанию</option>
+      </select>
+
+      <label for="technology-choice">Технология:</label>
+      <select name="technology" id="technology-choice">
+        <option value="node.js">Node.js</option>
+        <option value="react.js">React.js</option>
+      </select>
+
+      <label for="jobs-amount">Количество вакансий:</label>
+      <input type="number" value="10" id="jobs-amount" name="amount" />
+      <input type="submit" value="найти">
+    
+    </fieldset>
+  </form>
+
+  {{#if err}}
+    <h3>{{err}}</h3>
+  {{/if}}
+
+  {{#if no_city}}
+    <h2>{{no_city}}</h2>
+  {{/if}}
+
+  {{#if jobs}}
+    <ul>
+      {{#each jobs}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+</body>
+</html>

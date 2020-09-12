@@ -1,0 +1,9 @@
+# Apple Desktop Services Store
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Temp working directory
+temp/
+node_modules
