@@ -24,6 +24,7 @@ const url_storage = new Map([
   ['hc', 'https://career.habr.com/vacancies?city_id=null&q=null']
 ])
 
+app.get('/', (_, res) => res.redirect('/jobs'))
 app.get('/jobs', (_, res) => res.render('jobs', { title: 'Поиск работы' }))
 
 app.post('/jobs', async (req, res) => {
