@@ -2,7 +2,7 @@
   "name": "jobs-parser",
   "version": "1.0.0",
   "description": "Serverside development and more",
-  "main": "",
+  "main": "jobs-parser.js",
   "scripts": {
     "start": "node jobs-parser"
   },
