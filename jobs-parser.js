@@ -109,5 +109,5 @@ app.post('/jobs', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(bold.underline.xterm(226)(`Server has been started on localhost:${PORT}`))
+  console.log(bold.underline.xterm(226)(`Server has been started on localhost: ${PORT}`))
 })
