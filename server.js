@@ -1,12 +1,14 @@
-const { bold, red, yellowBright } = require('cli-color')
-const path = require('path')
-const express = require('express')
-const consolidate = require('consolidate')
-const { promisify } = require('util')
-const request = require('request')
-const cheerio = require('cheerio')
+const { bold }				= require('cli-color')
+const path 						= require('path')
+const express 				= require('express')
+const consolidate 		= require('consolidate')
+const { promisify } 	= require('util')
+const request 				= require('request')
+const cheerio 				= require('cheerio')
 
 const promisifiedRequest = promisify(request)
+
+const PORT = process.env.PORT || 8000
 
 const app = express()
 
@@ -84,11 +86,11 @@ app.post('/jobs', async (req, res) => {
 			const { body } = await promisifiedRequest(url)
 			const $ = cheerio.load(body)
 
-			const vacancies = [].slice.call($('.job')
+			const vacancies = [].slice.call($('.vacancy-card__inner')
 				.map((_, element) => 
-					`${$(element).find('.inner').children('.date').text()}
-					${$(element).find('.inner').find('.title').text()}
-					${$(element).find('.inner').find('.salary').text()}`
+					`${$(element).find('.vacancy-card__date').text()}
+					${$(element).find('.vacancy-card__title').text()}
+					${$(element).find('.vacancy-card__salary').text()}`
 				), 0, amount)
 
 			res.render('jobs', {
@@ -106,4 +108,6 @@ app.post('/jobs', async (req, res) => {
 	}
 })
 
-app.listen(3030, () => console.log(bold.yellowBright('Сервер запущен! Порт: 3030')))
+app.listen(PORT, () => {
+  console.log(bold.underline.xterm(226)(`Server has been started on localhost:${PORT}`))
+})
