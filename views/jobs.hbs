@@ -14,47 +14,58 @@
     <fieldset>
       <legend>Поиск работы</legend>
 
-      <label for="source-choice">Ресурс:</label>
-      <select name="source" id="source-choice">
-        <option value="hh">hh</option>
-        <option value="hc">Хабр Карьера</option>
-      </select>
+      <div class="wrapper">
+        <div class="dropdown">
+          <label for="source-choice">Ресурс:</label>
+          <select name="source" id="source-choice">
+            <option value="hh">hh</option>
+            <option value="hc">Хабр Карьера</option>
+          </select>
+        </div>
 
-      <label for="city-choice">Город:</label>
-      <select name="city" id="city-choice">
-        <option value="moscow">Москва</option>
-        <option value="petersburg">Санкт-Петербург</option>
-        <option value="new_city">Добавьте ещё города по желанию</option>
-      </select>
+        <div class="dropdown">
+          <label for="city-choice">Город:</label>
+          <select name="city" id="city-choice">
+            <option value="moscow">Москва</option>
+            <option value="petersburg">Санкт-Петербург</option>
+            <option value="new_city">Добавьте ещё города по желанию</option>
+          </select>
+        </div>
 
-      <label for="technology-choice">Технология:</label>
-      <select name="technology" id="technology-choice">
-        <option value="node.js">Node.js</option>
-        <option value="react.js">React.js</option>
-      </select>
+        <div class="dropdown">
+          <label for="technology-choice">Технология:</label>
+          <select name="technology" id="technology-choice">
+            <option value="node.js">Node.js</option>
+            <option value="react.js">React.js</option>
+          </select>
+        </div>
 
-      <label for="jobs-amount">Количество вакансий:</label>
-      <input type="number" value="10" id="jobs-amount" name="amount" />
-      <input type="submit" value="найти">
-    
+        <div class="dropdown">
+          <label for="jobs-amount">Количество вакансий:</label>
+          <input type="number" value="10" id="jobs-amount" name="amount" />
+          <input type="submit" value="найти">
+        </div>
+      </div>
     </fieldset>
   </form>
 
-  {{#if err}}
-    <h3>{{err}}</h3>
-  {{/if}}
+  <div class="container">
+    {{#if err}}
+      <h3>{{err}}</h3>
+    {{/if}}
 
-  {{#if no_city}}
-    <h2>{{no_city}}</h2>
-  {{/if}}
+    {{#if no_city}}
+      <h2>{{no_city}}</h2>
+    {{/if}}
 
-  {{#if jobs}}
-    <ul>
-      {{#each jobs}}
-        <li>{{this}}</li>
-      {{/each}}
-    </ul>
-  {{/if}}
+    {{#if jobs}}
+      <ul>
+        {{#each jobs}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
 
 </body>
 </html>

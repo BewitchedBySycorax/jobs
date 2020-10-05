@@ -1,12 +1,9 @@
 const path = require('path')
-const { promisify } = require('util')
 const { bold } = require('cli-color')
 const express = require('express')
 const consolidate = require('consolidate')
-const request = require('request')
+const fetch = require('node-fetch')
 const cheerio = require('cheerio')
-
-const promisifiedRequest = promisify(request)
 
 const PORT = process.env.PORT || 8000
 
@@ -52,7 +49,8 @@ app.post('/jobs', async (req, res) => {
 				.replace(/null/, `${city_id}`)
 				.replace(/null/, `${technology}`)
 
-			const { body } = await promisifiedRequest(url)
+			const response = await fetch(url)
+			const body = await response.text()
 			const $ = cheerio.load(body)
 
 			const vacancies = [].slice.call($('.vacancy-serp-item')
@@ -84,7 +82,8 @@ app.post('/jobs', async (req, res) => {
 				.replace(/null/, `${city_id}`)
 				.replace(/null/, `${technology}`)
 
-			const { body } = await promisifiedRequest(url)
+			const response = await fetch(url)
+			const body = await response.text()
 			const $ = cheerio.load(body)
 
 			const vacancies = [].slice.call($('.vacancy-card__inner')

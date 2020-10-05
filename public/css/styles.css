@@ -25,26 +25,38 @@ legend {
   text-align: center;
 }
 
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding-left: 20%;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding-left: 18%;
+}
+
+.dropdown {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 70%;
+}
+
 label {
   display: block;
   margin-top: 1em;
-  margin-bottom: 0.5em;
-}
-
-label:first-child {
-  margin-top: 0;
+  margin-bottom: 0.3em;
 }
 
 input[type="submit"] {
-  display: block;
   margin-top: 2em;
-  margin-left: 3em;
   padding: 5px 15px;
   font-weight: bold;
   color: #333;
   background: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 0.5em;
   background-image: linear-gradient(to bottom, #fff, #ddd);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   text-shadow: 0 1px 1px white;
