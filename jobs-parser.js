@@ -33,7 +33,7 @@ app.post('/jobs', async (req, res) => {
 	let city_id = null
 
 	try {
-		if (source == 'hh' && url_storage.has('hh')) {
+		if (source === 'hh' && url_storage.has('hh')) {
 			switch (city) {
 				case 'moscow':
 					city_id = 1
@@ -44,13 +44,13 @@ app.post('/jobs', async (req, res) => {
 				default:
 					console.log(bold.red('Добавьте интересующий Вас город сюда и во "views/jobs.hbs"'))
 					res.render('jobs', {
-						no_city: 'Добавьте интересующий Вас город сюда и в "./server.js"'
+						no_city: 'Добавьте интересующий Вас город сюда и в "./jobs-parser.js"'
 					})
 			}
 
 			const url = url_storage.get('hh')
 				.replace(/null/, `${city_id}`)
-				.replace(/null/, `${req.body.technology}`)
+				.replace(/null/, `${technology}`)
 
 			const { body } = await promisifiedRequest(url)
 			const $ = cheerio.load(body)
@@ -65,7 +65,7 @@ app.post('/jobs', async (req, res) => {
 				jobs: vacancies,
 			})
 
-		} else if (source == 'hc' && url_storage.has('hc')) {
+		} else if (source === 'hc' && url_storage.has('hc')) {
 			switch (city) {
 				case 'moscow':
 					city_id = 678
@@ -76,7 +76,7 @@ app.post('/jobs', async (req, res) => {
 				default:
 					console.log(bold.red('Добавьте интересующий Вас город сюда и во "views/jobs.hbs"'))
 					res.render('jobs', {
-						no_city: 'Добавьте интересующий Вас город сюда и в "./server.js"'
+						no_city: 'Добавьте интересующий Вас город сюда и в "./jobs-parser.js"'
 					})
 			}
 
