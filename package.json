@@ -4,7 +4,7 @@
   "description": "Serverside development and more",
   "main": "",
   "scripts": {
-    "start": "node jobs"
+    "start": "node jobs-parser"
   },
   "author": "Aleksei Voitovskii <al.voitovskii@gmail.com>",
   "license": "ISC",
