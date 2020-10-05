@@ -26,86 +26,86 @@ app.get('/jobs', (_, res) => res.render('jobs', { title: 'Поиск работ�
 
 app.post('/jobs', async (req, res) => {
 
-	const { source, city, technology, amount } = req.body
-	let city_id = null
+  const { source, city, technology, amount } = req.body
+  let city_id = null
 
-	try {
-		if (source === 'hh' && url_storage.has('hh')) {
-			switch (city) {
-				case 'moscow':
-					city_id = 1
-					break
-				case 'petersburg':
-					city_id = 2
-					break
-				default:
-					console.log(bold.red('Добавьте интересующий Вас город сюда и во "views/jobs.hbs"'))
-					res.render('jobs', {
-						no_city: 'Добавьте интересующий Вас город сюда и в "./jobs-parser.js"'
-					})
-			}
+  try {
+    if (source === 'hh' && url_storage.has('hh')) {
+      switch (city) {
+        case 'moscow':
+          city_id = 1
+          break
+        case 'petersburg':
+          city_id = 2
+          break
+        default:
+          console.log(bold.red('Добавьте интересующий Вас город сюда и во "views/jobs.hbs"'))
+          res.render('jobs', {
+            no_city: 'Добавьте интересующий Вас город сюда и в "./jobs-parser.js"'
+          })
+      }
 
-			const url = url_storage.get('hh')
-				.replace(/null/, `${city_id}`)
-				.replace(/null/, `${technology}`)
+      const url = url_storage.get('hh')
+        .replace(/null/, `${city_id}`)
+        .replace(/null/, `${technology}`)
 
-			const response = await fetch(url)
-			const body = await response.text()
-			const $ = cheerio.load(body)
+      const response = await fetch(url)
+      const body = await response.text()
+      const $ = cheerio.load(body)
 
-			const vacancies = [].slice.call($('.vacancy-serp-item')
-				.map((_, element) => 
-					`${$(element).find('.vacancy-serp-item__row_header').text()}
-					${$(element).find('.vacancy-serp-item__meta-info').text()}`
-				), 0, amount)
+      const vacancies = [].slice.call($('.vacancy-serp-item')
+        .map((_, element) => 
+          `${$(element).find('.vacancy-serp-item__row_header').text()}
+          ${$(element).find('.vacancy-serp-item__meta-info').text()}`
+        ), 0, amount)
 
-			res.render('jobs', {
-				jobs: vacancies,
-			})
+      res.render('jobs', {
+        jobs: vacancies,
+      })
 
-		} else if (source === 'hc' && url_storage.has('hc')) {
-			switch (city) {
-				case 'moscow':
-					city_id = 678
-					break
-				case 'petersburg':
-					city_id = 679
-					break
-				default:
-					console.log(bold.red('Добавьте интересующий Вас город сюда и во "views/jobs.hbs"'))
-					res.render('jobs', {
-						no_city: 'Добавьте интересующий Вас город сюда и в "./jobs-parser.js"'
-					})
-			}
+    } else if (source === 'hc' && url_storage.has('hc')) {
+      switch (city) {
+        case 'moscow':
+          city_id = 678
+          break
+        case 'petersburg':
+          city_id = 679
+          break
+        default:
+          console.log(bold.red('Добавьте интересующий Вас город сюда и во "views/jobs.hbs"'))
+          res.render('jobs', {
+            no_city: 'Добавьте интересующий Вас город сюда и в "./jobs-parser.js"'
+          })
+      }
 
-			const url = url_storage.get('hc')
-				.replace(/null/, `${city_id}`)
-				.replace(/null/, `${technology}`)
+      const url = url_storage.get('hc')
+        .replace(/null/, `${city_id}`)
+        .replace(/null/, `${technology}`)
 
-			const response = await fetch(url)
-			const body = await response.text()
-			const $ = cheerio.load(body)
+      const response = await fetch(url)
+      const body = await response.text()
+      const $ = cheerio.load(body)
 
-			const vacancies = [].slice.call($('.vacancy-card__inner')
-				.map((_, element) => 
-					`${$(element).find('.vacancy-card__date').text()}
-					${$(element).find('.vacancy-card__title').text()}
-					${$(element).find('.vacancy-card__salary').text()}`
-				), 0, amount)
+      const vacancies = [].slice.call($('.vacancy-card__inner')
+        .map((_, element) => 
+          `${$(element).find('.vacancy-card__date').text()}
+          ${$(element).find('.vacancy-card__title').text()}
+          ${$(element).find('.vacancy-card__salary').text()}`
+        ), 0, amount)
 
-			res.render('jobs', {
-				jobs: vacancies,
-			})
+      res.render('jobs', {
+        jobs: vacancies,
+      })
 
-		} else {
-			res.render('jobs', {
-				err: 'Такого источника не существует!',
-			})	
-		}
-	}
-	catch(err) {
-		throw Error
-	}
+    } else {
+      res.render('jobs', {
+        err: 'Такого источника не существует!',
+      })	
+    }
+  }
+  catch(err) {
+    throw Error
+  }
 })
 
 app.listen(PORT, () => {
