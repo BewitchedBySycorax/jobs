@@ -1,10 +1,10 @@
 {
-  "name": "jobs-parser",
+  "name": "jobs",
   "version": "1.0.0",
   "description": "Serverside development and more",
-  "main": "jobs-parser.js",
+  "main": "",
   "scripts": {
-    "start": "node jobs-parser"
+    "start": "node jobs"
   },
   "author": "Aleksei Voitovskii <al.voitovskii@gmail.com>",
   "license": "ISC",
@@ -15,8 +15,5 @@
     "express": "^4.17.1",
     "handlebars": "^4.5.3",
     "request": "^2.88.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
   }
 }
