@@ -104,7 +104,7 @@ app.post('/jobs', async (req, res) => {
     }
   }
   catch(err) {
-    throw Error
+    throw new Error
   }
 })
 
