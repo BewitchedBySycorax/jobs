@@ -1,10 +1,10 @@
-const { bold }				= require('cli-color')
-const path 						= require('path')
-const express 				= require('express')
-const consolidate 		= require('consolidate')
-const { promisify } 	= require('util')
-const request 				= require('request')
-const cheerio 				= require('cheerio')
+const path = require('path')
+const { promisify } = require('util')
+const { bold } = require('cli-color')
+const express = require('express')
+const consolidate = require('consolidate')
+const request = require('request')
+const cheerio = require('cheerio')
 
 const promisifiedRequest = promisify(request)
 
